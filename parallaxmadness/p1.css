@@ -8,8 +8,8 @@ body {
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     color: #fff;
     height: 100vh;
-    perspective: 1px; /* ? */
-    transform-style: preserve-3d; /* ? */
+    perspective: 1px; 
+    transform-style: preserve-3d;
     overflow-x: hidden;
     overflow-y: auto;
 }

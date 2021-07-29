@@ -1,0 +1,51 @@
+:root {
+    --gradient: linear-gradient(
+        90deg,
+        rgb(64, 255, 0), 
+        #0d00ff
+    );
+}
+@keyframes bg-animation {
+    0% {background-position: left;}
+    50% {background-position: right;}
+    100% {background-position: left;}
+}
+
+body {
+    font-family: Helvetica, basic-sans, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: #aaa;
+    background: #eee;
+    background-image: var(--gradient);
+    background-size: 500%;
+    animation: bg-animation 25s infinite;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    width: 30%;
+    padding: 0.5em;
+    opacity: 0.7;
+    box-shadow: 0 0 3em rgba(0, 0, 0, 0.15);
+}
+
+.title {
+    font-weight: 900;
+    font-size: 5rem;
+    color: transparent;
+
+    background-image: var(--gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    display: inline-block;
+    background-size: 400%;
+    animation: bg-animation 10s infinite;
+}
