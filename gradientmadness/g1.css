@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato');
+
 :root {
     --gradient: linear-gradient(
         90deg,
@@ -12,7 +14,7 @@
 }
 
 body {
-    font-family: Helvetica, basic-sans, sans-serif;
+    font-family: 'Lato', sans-serif;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -32,7 +34,7 @@ body {
     background: white;
     width: 30%;
     padding: 0.5em;
-    opacity: 0.7;
+    background-color: transparent;
     box-shadow: 0 0 3em rgba(0, 0, 0, 0.15);
 }
 
