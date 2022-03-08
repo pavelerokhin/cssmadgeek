@@ -1,16 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato');
-
 :root {
-    --gradient: linear-gradient(
-        90deg,
-        rgb(64, 255, 0), 
-        #0d00ff
-    );
+    --gradient: linear-gradient( 90deg, rgb(64, 255, 0), #0d00ff);
+    --gradient2: linear-gradient( 90deg, rgb(242, 0, 255), #e73b2e);
 }
+
 @keyframes bg-animation {
-    0% {background-position: left;}
-    50% {background-position: right;}
-    100% {background-position: left;}
+    0% {
+        background-position: left;
+    }
+    50% {
+        background-position: right;
+    }
+    100% {
+        background-position: left;
+    }
 }
 
 body {
@@ -32,22 +35,81 @@ body {
     align-items: center;
     justify-content: center;
     background: white;
-    width: 30%;
-    padding: 0.5em;
+    /* width: 30%; */
+    /* padding: 0.5em; */
     background-color: transparent;
     box-shadow: 0 0 3em rgba(0, 0, 0, 0.15);
 }
 
-.title {
+.title,
+.title2 {
     font-weight: 900;
     font-size: 5rem;
     color: transparent;
-
     background-image: var(--gradient);
     background-clip: text;
     -webkit-background-clip: text;
-    color: transparent;
     display: inline-block;
     background-size: 400%;
+    animation: bg-animation 5s infinite;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    z-index: 1000;
+}
+
+.title {
+    color: white;
+    z-index: 4000;
+}
+
+.title2 {
+    font-weight: 900;
+    font-size: 3rem;
+    color: transparent;
+    background-image: var(--gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    display: inline-block;
+    background-size: 400%;
+    animation: bg-animation 5s infinite;
+    position: relative;
+    z-index: 1000;
+}
+
+.menu {
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    font-family: Lato;
+    background-color: black;
+    width: 500px;
+    height: 310px;
+    top: 40%;
+    z-index: 2000;
+}
+
+.menu p {
+    font-size: 3rem;
+    color: transparent;
+    background-image: var(--gradient2);
+    background-clip: text;
+    -webkit-background-clip: text;
+    display: inline-block;
+    background-size: 400%;
+    animation: bg-animation 2s infinite;
+    z-index: 2000;
+}
+
+div.img {
+    /* height: 500px;
+    width: 500px; */
+    background-image: var(--gradient);
+    background-size: 700%;
     animation: bg-animation 10s infinite;
 }

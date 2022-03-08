@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            #img-container {
+                /* margin: 100px; */
+                position: relative;
+                height: 600px;
+                width: 870px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="img-container">
+            <div class="img img1"></div>
+            <div class="img img2"></div>
+            <div class="img img3"></div>
+            <div class="img img4"></div>
+            <div class="img img5"></div>
+        </div>
+    </body>
+
+    <script>
+        class MentyataGalery {
+            constructor({
+                containerId = "",
+                cursorUrl = "",
+                imgCenteredX = false,
+                imgCenteredY = false,
+                imgUrls = [],
+            }) {
+                if (containerId.length == 0) {
+                    console.info(
+                        "no mentyata's gallery container set, no gallery will be initialized"
+                    );
+                    return;
+                }
+                if (imgUrls.length == 0) {
+                    console.info(
+                        "no mentyata's gallery photos urls set, no gallery will be initialized"
+                    );
+                    return;
+                }
+
+                // pointer to the instance of the gallery
+                let that = this;
+                // get gallery container
+                that.galleryContainer = null;
+
+                try {
+                    that.galleryContainer = document.querySelector(
+                        "#" + containerId
+                    );
+                    if (!that.galleryContainer) {
+                        throw new Error("no container in DOM");
+                    }
+                } catch (e) {
+                    console.error(e);
+                    throw new Error(
+                        `no mentyata gallery's container with id \"{mentryayasContainer}\" found in dom`
+                    );
+                }
+
+                that.galleryContainer.innerHTML = "";
+                that.galleryContainer.style.overflow = "hidden";
+                that.galleryContainer.style.userSelect = "none";
+
+                // set the coursor
+                if (cursorUrl.length != 0) {
+                    that.galleryContainer.style.cursor = `url("${cursorUrl}"), auto`;
+                }
+                // debugger;
+
+                // internalize parameter and future photos to the object
+                that.urls = imgUrls;
+                that.imgs = [];
+
+                that.urls.forEach((url, i) => {
+                    let img = document.createElement("img");
+                    img.setAttribute("src", `${url}`);
+                    img.setAttribute("draggable", "false");
+
+                    img.classList.add("img");
+
+                    // img's styling
+                    img.style.backgroundColor = "transparent";
+                    img.style.display = i == 0 ? "block" : "none";
+                    img.style.height = "auto";
+                    img.style.pointerEvents = "none";
+                    img.style.position = "absolute";
+                    img.style.userSelect = "none";
+                    img.style.width = "100%";
+
+                    // center image if needed
+                    if (imgCenteredX) {
+                        img.style.transform = "translateX(-25%)";
+                    }
+                    if (imgCenteredY) {
+                        img.style.transform = "translateY(-25%)";
+                    }
+
+                    // img.style.cursor = "inherit";
+
+                    that.galleryContainer.appendChild(img);
+                    that.imgs.push(img);
+                });
+
+                window.onload = () => {
+                    that.galleryContainer.addEventListener("mousemove", (e) => {
+                        const visible = that.calculateVisiblePic(e);
+                        that.imgs.forEach((img, i) => {
+                            if (i == visible) {
+                                img.style.display = "block";
+                            } else {
+                                img.style.display = "none";
+                            }
+                        });
+                    });
+                };
+            }
+
+            calculateVisiblePic(mouseMoveEvent) {
+                let rect = mouseMoveEvent.target.getBoundingClientRect();
+                return Math.abs(
+                    Math.floor(
+                        this.imgs.length *
+                            ((mouseMoveEvent.clientX - rect.left) /
+                                this.galleryContainer.offsetWidth)
+                    )
+                );
+            }
+        }
+
+        let mg = new MentyataGalery({
+            containerId: "img-container",
+            cursorUrl: "cursor.png",
+            imgCenteredX: true,
+            imgCenteredY: true,
+            imgUrls: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"],
+        });
+    </script>
+</html>
